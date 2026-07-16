@@ -6,12 +6,12 @@ Automated pass/fail test bench for validating Wheel Speed Sensor (WSS) output si
 
 Active WSS sensors output a square-wave signal whose **frequency** and **peak-to-peak voltage (Vpp)** must stay within spec for the sensor to be considered functional. Manually inspecting waveforms on a scope for every test unit is slow and error-prone. This project automates that check.
 
-![Reference active sensor output](images/reference_sensor_output.png)
+<img width="1239" height="721" alt="Output wave of active sensor" src="https://github.com/user-attachments/assets/d42ffe35-b482-4c33-a56b-33dc52c27384" />
 *Typical output waveform of a healthy active WSS sensor — oscillates between ~0.78V and ~1.46V, which informed the Vpp threshold used below.*
 
 To validate the logic under realistic conditions, the clean square wave is simulated with added Gaussian noise, replicating the noise a real WSS signal would pick up from wiring/EMI in an automotive environment:
 
-![Simulated noisy input waveform](images/simulated_input_waveform.png)
+<img width="544" height="390" alt="Square wave with gaussian noise" src="https://github.com/user-attachments/assets/0ba83402-19cb-4157-adeb-de990de5493e" />
 *Square wave with Gaussian noise added — this is the actual input fed into the frequency and amplitude checks below.*
 
 ## How It Works
@@ -23,18 +23,11 @@ The VI simulates/acquires a noisy square-wave sensor signal and runs two indepen
 3. **FFT reconstruction** — Splits the frequency-domain signal into real/imaginary components and reconstructs the magnitude (√(re² + im²)) for waveform visualization on a separate graph.
 4. **Decision logic** — Both checks (frequency AND amplitude) are ANDed together to drive a single **Pass/Fail** boolean indicator.
 
-![LabVIEW block diagram](images/block_diagram.png)
+<img width="1579" height="836" alt="Block_Diagram" src="https://github.com/user-attachments/assets/801f29c3-bd46-459c-a078-f2c51c5754f6" />
 
-## Repo Structure
 
-```
-├── WSS_Signal_Validation.vi     # Main LabVIEW VI
-├── images/
-│   ├── block_diagram.png        # Full block diagram
-│   ├── reference_sensor_output.png  # Reference active sensor waveform
-│   └── simulated_input_waveform.png # Noisy simulated input signal
-└── README.md
-```
+
+
 
 ## Tools & Concepts Used
 
